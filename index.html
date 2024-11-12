@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Form Input Employee</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="db.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            
+        <h1>Form Input Employee</h1>
+        <form id="employeeForm">
+            <label for="nik">NIK:</label>
+            <input type="text" id="nik" name="nik" required /><br />
+
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required /><br />
+
+            <label for="golongan">Golongan:</label>
+            <select
+                id="golongan"
+                name="golongan"
+                onchange="updateGajiPokok()"
+                required
+            >
+                <option value="">Pilih Golongan</option>
+                <option value="IIIA">IIIA</option>
+                <option value="IIIB">IIIB</option>
+                <option value="IIIC">IIIC</option>
+                <option value="IIID">IIID</option></select
+            ><br />
+
+            <label for="gajiPokok">Gaji Pokok:</label>
+            <input
+                type="number"
+                id="gajiPokok"
+                name="gajiPokok"
+                readonly
+            /><br />
+
+            <label for="statusKeluarga">Status Keluarga:</label>
+            <input
+                type="text"
+                id="statusKeluarga"
+                name="statusKeluarga"
+            /><br />
+
+            <label for="tunjanganKeluarga">Tunjangan Keluarga:</label>
+            <input
+                type="number"
+                id="tunjanganKeluarga"
+                name="tunjanganKeluarga"
+                readonly
+            /><br />
+
+            <label for="jmlhAnak">Jumlah Anak:</label>
+            <select
+                id="jmlhAnak"
+                name="jmlhAnak"
+                onchange="updateTunjanganAnak()"
+                required
+            >
+                <option value="0">Pilih Jumlah Anak</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option></select
+            ><br />
+
+            <label for="tunjanganAnak">Tunjangan Anak:</label>
+            <input
+                type="number"
+                id="tunjanganAnak"
+                name="tunjanganAnak"
+                readonly
+            /><br />
+
+            <label for="jabatan">Jabatan:</label>
+            <select
+                id="jabatan"
+                name="jabatan"
+                onchange="updateTunjanganJabatan()"
+                required
+            >
+                <option value="">Pilih Jabatan</option>
+                <option value="asisten ahli">Asisten Ahli</option>
+                <option value="lektor">Lektor</option>
+                <option value="lektor kepala">Lektor Kepala</option>
+                <option value="guru besar">Guru Besar</option></select
+            ><br />
+
+            <label for="tunjanganJabatan">Tunjangan Jabatan:</label>
+            <input
+                type="number"
+                id="tunjanganJabatan"
+                name="tunjanganJabatan"
+                readonly
+            /><br />
+
+            <label for="gajiBersih">Gaji Bersih:</label>
+            <input
+                type="number"
+                id="gajiBersih"
+                name="gajiBersih"
+                readonly
+            /><br />
+
+            <button type="button" onclick="simpanData()">Simpan Data</button>
+        </form>
+        <br><br>
+         <!-- Form for Updating Employee -->
+         <h1>Update Employee</h1>
+         <form id="updateEmployeeForm" style="display: none">
+             <input type="hidden" id="updateId" />
+             <label for="updateNik">NIK:</label>
+             <input type="text" id="updateNik" name="updateNik" required /><br />
+ 
+             <label for="updateName">Name:</label>
+             <input
+                 type="text"
+                 id="updateName"
+                 name="updateName"
+                 required
+             /><br />
+ 
+             <label for="updateGolongan">Golongan:</label>
+             <select id="updateGolongan" name="updateGolongan" onchange="updateUpdateGajiPokok()" required>
+                 
+                 <option value="">Pilih Golongan</option>
+                 <option value="IIIA">IIIA</option>
+                 <option value="IIIB">IIIB</option>
+                 <option value="IIIC">IIIC</option>
+                 <option value="IIID">IIID</option></select
+             ><br />
+ 
+             <label for="updateGajiPokok">Gaji Pokok:</label>
+             <input
+                 type="number"
+                 id="updateGajiPokok"
+                 name="updateGajiPokok"
+                 readonly
+             /><br />
+ 
+             <label for="updateStatusKeluarga">Status Keluarga:</label>
+             <input
+                 type="text"
+                 id="updateStatusKeluarga"
+                 name="updateStatusKeluarga"
+             /><br />
+ 
+             <label for="updateTunjanganKeluarga">Tunjangan Keluarga:</label>
+             <input
+                 type="number"
+                 id="updateTunjanganKeluarga"
+                 name="updateTunjanganKeluarga"
+                 readonly
+             /><br />
+ 
+             <label for="updateJmlhAnak">Jumlah Anak:</label>
+             <select id="updateJmlhAnak" name="updateJmlhAnak" onchange="updateUpdateTunjanganAnak()" required>
+                 
+                 <option value="0">Pilih Jumlah Anak</option>
+                 <option value="1">1</option>
+                 <option value="2">2</option>
+                 <option value="3">3</option></select
+             ><br />
+ 
+             <label for="updateTunjanganAnak">Tunjangan Anak:</label>
+             <input
+                 type="number"
+                 id="updateTunjanganAnak"
+                 name="updateTunjanganAnak"
+                 readonly
+             /><br />
+ 
+             <label for="updateJabatan">Jabatan:</label>
+             <select id="updateJabatan" name="updateJabatan" onchange="updateUpdateTunjanganJabatan()" required>
+                 <option value="">Pilih Jabatan</option>
+                 <option value="asisten ahli">Asisten Ahli</option>
+                 <option value="lektor">Lektor</option>
+                 <option value="lektor kepala">Lektor Kepala</option>
+                 <option value="guru besar">Guru Besar</option></select
+             ><br />
+ 
+             <label for="updateTunjanganJabatan">Tunjangan Jabatan:</label>
+             <input
+                 type="number"
+                 id="updateTunjanganJabatan"
+                 name="updateTunjanganJabatan"
+                 readonly
+             /><br />
+ 
+             <label for="updateGajiBersih">Gaji Bersih:</label>
+             <input
+                 type="number"
+                 id="updateGajiBersih"
+                 name="updateGajiBersih"
+                 readonly
+             /><br />
+ 
+             <button type="button" onclick="updateEmployee()">
+                 Update Employee
+             </button>
+         </form>
+    </div>
+        <section class="table-section">
+        <h1>Employee Data</h1>
+        <button id="showEmployeData">Tampilkan Data Karyawan</button
+        ><br /><br />
+        <table id="employeTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NIK</th>
+                    <th>Name</th>
+                    <th>Golongan</th>
+                    <th>Gaji Pokok</th>
+                    <th>Status Keluarga</th>
+                    <th>Tunjangan Keluarga</th>
+                    <th>Jumlah Anak</th>
+                    <th>Tunjangan Anak</th>
+                    <th>Jabatan</th>
+                    <th>Tunjangan Jabatan</th>
+                    <th>Gaji Bersih</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will be populated here -->
+            </tbody>
+            <br /><br />
+        </table>
+    </section>
+        <br /><br />
+
+       
+
+        
+
+        <script src="db.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>
